@@ -1,0 +1,3 @@
+[submodule "ext/s2-ws-json"]
+	path = ext/s2-ws-json
+	url = git@github.com:flexiblepower/s2-ws-json.git
