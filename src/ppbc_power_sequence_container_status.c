@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -59,7 +60,6 @@ void ppbc_power_sequence_container_status_free(ppbc_power_sequence_container_sta
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ppbc_power_sequence_container_status_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ppbc_power_sequence_container_status->power_profile_id) {
         free(ppbc_power_sequence_container_status->power_profile_id);
         ppbc_power_sequence_container_status->power_profile_id = NULL;

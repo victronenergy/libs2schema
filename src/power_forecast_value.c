@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -107,7 +108,6 @@ void power_forecast_value_free(power_forecast_value_t *power_forecast_value) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "power_forecast_value_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (power_forecast_value->value_upper_limit) {
         free(power_forecast_value->value_upper_limit);
         power_forecast_value->value_upper_limit = NULL;

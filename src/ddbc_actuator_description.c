@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -74,7 +75,6 @@ void ddbc_actuator_description_free(ddbc_actuator_description_t *ddbc_actuator_d
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ddbc_actuator_description_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ddbc_actuator_description->id) {
         free(ddbc_actuator_description->id);
         ddbc_actuator_description->id = NULL;
@@ -84,12 +84,14 @@ void ddbc_actuator_description_free(ddbc_actuator_description_t *ddbc_actuator_d
         ddbc_actuator_description->diagnostic_label = NULL;
     }
     if (ddbc_actuator_description->supported_commodites) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ddbc_actuator_description->supported_commodites) {
         }
         list_freeList(ddbc_actuator_description->supported_commodites);
         ddbc_actuator_description->supported_commodites = NULL;
     }
     if (ddbc_actuator_description->operation_modes) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ddbc_actuator_description->operation_modes) {
             ddbc_operation_mode_free(listEntry->data);
         }
@@ -97,6 +99,7 @@ void ddbc_actuator_description_free(ddbc_actuator_description_t *ddbc_actuator_d
         ddbc_actuator_description->operation_modes = NULL;
     }
     if (ddbc_actuator_description->transitions) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ddbc_actuator_description->transitions) {
             transition_free(listEntry->data);
         }
@@ -104,6 +107,7 @@ void ddbc_actuator_description_free(ddbc_actuator_description_t *ddbc_actuator_d
         ddbc_actuator_description->transitions = NULL;
     }
     if (ddbc_actuator_description->timers) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ddbc_actuator_description->timers) {
             timer_type_free(listEntry->data);
         }
@@ -145,7 +149,7 @@ cJSON *ddbc_actuator_description_convertToJSON(ddbc_actuator_description_t *ddbc
     listEntry_t *supported_commoditesListEntry;
     if (ddbc_actuator_description->supported_commodites) {
     list_ForEach(supported_commoditesListEntry, ddbc_actuator_description->supported_commodites) {
-    cJSON *itemLocal = commodity_convertToJSON((s2_commodity__e)supported_commoditesListEntry->data);
+    cJSON *itemLocal = commodity_convertToJSON((s2_commodity__e)(intptr_t)supported_commoditesListEntry->data);
     if(itemLocal == NULL) {
     goto fail;
     }
@@ -295,7 +299,7 @@ ddbc_actuator_description_t *ddbc_actuator_description_parseFromJSON(cJSON *ddbc
         }
         s2_commodity__e supported_commoditesItem = commodity_parseFromJSON(supported_commodites_local_nonprimitive);
 
-        list_addElement(supported_commoditesList, (void *)supported_commoditesItem);
+        list_addElement(supported_commoditesList, (void *)(intptr_t)supported_commoditesItem);
     }
 
     // ddbc_actuator_description->operation_modes

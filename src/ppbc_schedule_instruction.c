@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -71,7 +72,6 @@ void ppbc_schedule_instruction_free(ppbc_schedule_instruction_t *ppbc_schedule_i
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ppbc_schedule_instruction_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ppbc_schedule_instruction->message_type) {
         free(ppbc_schedule_instruction->message_type);
         ppbc_schedule_instruction->message_type = NULL;

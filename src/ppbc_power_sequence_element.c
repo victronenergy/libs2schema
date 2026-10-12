@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -47,12 +48,12 @@ void ppbc_power_sequence_element_free(ppbc_power_sequence_element_t *ppbc_power_
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ppbc_power_sequence_element_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ppbc_power_sequence_element->duration) {
         free(ppbc_power_sequence_element->duration);
         ppbc_power_sequence_element->duration = NULL;
     }
     if (ppbc_power_sequence_element->power_values) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ppbc_power_sequence_element->power_values) {
             power_forecast_value_free(listEntry->data);
         }

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -61,7 +62,6 @@ void pebc_power_constraints_free(pebc_power_constraints_t *pebc_power_constraint
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "pebc_power_constraints_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (pebc_power_constraints->message_type) {
         free(pebc_power_constraints->message_type);
         pebc_power_constraints->message_type = NULL;
@@ -83,6 +83,7 @@ void pebc_power_constraints_free(pebc_power_constraints_t *pebc_power_constraint
         pebc_power_constraints->valid_until = NULL;
     }
     if (pebc_power_constraints->allowed_limit_ranges) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, pebc_power_constraints->allowed_limit_ranges) {
             pebc_allowed_limit_range_free(listEntry->data);
         }

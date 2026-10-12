@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void frbc_leakage_behaviour_free(frbc_leakage_behaviour_t *frbc_leakage_behaviou
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_leakage_behaviour_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_leakage_behaviour->message_type) {
         free(frbc_leakage_behaviour->message_type);
         frbc_leakage_behaviour->message_type = NULL;
@@ -63,6 +63,7 @@ void frbc_leakage_behaviour_free(frbc_leakage_behaviour_t *frbc_leakage_behaviou
         frbc_leakage_behaviour->valid_from = NULL;
     }
     if (frbc_leakage_behaviour->elements) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, frbc_leakage_behaviour->elements) {
             frbc_leakage_behaviour_element_free(listEntry->data);
         }

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -67,7 +68,6 @@ void ddbc_actuator_status_free(ddbc_actuator_status_t *ddbc_actuator_status) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ddbc_actuator_status_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ddbc_actuator_status->message_type) {
         free(ddbc_actuator_status->message_type);
         ddbc_actuator_status->message_type = NULL;

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void ddbc_average_demand_rate_forecast_free(ddbc_average_demand_rate_forecast_t 
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ddbc_average_demand_rate_forecast_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ddbc_average_demand_rate_forecast->message_type) {
         free(ddbc_average_demand_rate_forecast->message_type);
         ddbc_average_demand_rate_forecast->message_type = NULL;
@@ -63,6 +63,7 @@ void ddbc_average_demand_rate_forecast_free(ddbc_average_demand_rate_forecast_t 
         ddbc_average_demand_rate_forecast->start_time = NULL;
     }
     if (ddbc_average_demand_rate_forecast->elements) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ddbc_average_demand_rate_forecast->elements) {
             ddbc_average_demand_rate_forecast_element_free(listEntry->data);
         }

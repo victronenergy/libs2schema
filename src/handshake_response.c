@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -45,7 +46,6 @@ void handshake_response_free(handshake_response_t *handshake_response) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "handshake_response_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (handshake_response->message_type) {
         free(handshake_response->message_type);
         handshake_response->message_type = NULL;

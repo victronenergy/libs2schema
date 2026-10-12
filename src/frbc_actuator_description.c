@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -74,7 +75,6 @@ void frbc_actuator_description_free(frbc_actuator_description_t *frbc_actuator_d
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_actuator_description_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_actuator_description->id) {
         free(frbc_actuator_description->id);
         frbc_actuator_description->id = NULL;
@@ -84,12 +84,14 @@ void frbc_actuator_description_free(frbc_actuator_description_t *frbc_actuator_d
         frbc_actuator_description->diagnostic_label = NULL;
     }
     if (frbc_actuator_description->supported_commodities) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, frbc_actuator_description->supported_commodities) {
         }
         list_freeList(frbc_actuator_description->supported_commodities);
         frbc_actuator_description->supported_commodities = NULL;
     }
     if (frbc_actuator_description->operation_modes) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, frbc_actuator_description->operation_modes) {
             frbc_operation_mode_free(listEntry->data);
         }
@@ -97,6 +99,7 @@ void frbc_actuator_description_free(frbc_actuator_description_t *frbc_actuator_d
         frbc_actuator_description->operation_modes = NULL;
     }
     if (frbc_actuator_description->transitions) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, frbc_actuator_description->transitions) {
             transition_free(listEntry->data);
         }
@@ -104,6 +107,7 @@ void frbc_actuator_description_free(frbc_actuator_description_t *frbc_actuator_d
         frbc_actuator_description->transitions = NULL;
     }
     if (frbc_actuator_description->timers) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, frbc_actuator_description->timers) {
             timer_type_free(listEntry->data);
         }
@@ -145,7 +149,7 @@ cJSON *frbc_actuator_description_convertToJSON(frbc_actuator_description_t *frbc
     listEntry_t *supported_commoditiesListEntry;
     if (frbc_actuator_description->supported_commodities) {
     list_ForEach(supported_commoditiesListEntry, frbc_actuator_description->supported_commodities) {
-    cJSON *itemLocal = commodity_convertToJSON((s2_commodity__e)supported_commoditiesListEntry->data);
+    cJSON *itemLocal = commodity_convertToJSON((s2_commodity__e)(intptr_t)supported_commoditiesListEntry->data);
     if(itemLocal == NULL) {
     goto fail;
     }
@@ -295,7 +299,7 @@ frbc_actuator_description_t *frbc_actuator_description_parseFromJSON(cJSON *frbc
         }
         s2_commodity__e supported_commoditiesItem = commodity_parseFromJSON(supported_commodities_local_nonprimitive);
 
-        list_addElement(supported_commoditiesList, (void *)supported_commoditiesItem);
+        list_addElement(supported_commoditiesList, (void *)(intptr_t)supported_commoditiesItem);
     }
 
     // frbc_actuator_description->operation_modes

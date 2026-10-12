@@ -1,5 +1,6 @@
 {{#models}}
 {{#model}}
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -45,9 +46,11 @@ cJSON *{{classname}}_convertToJSON({{projectName}}_{{classVarName}}_{{enumName}}
     }
 {{/isBoolean}}
     return item;
+{{^isString}}
 fail:
     cJSON_Delete(item);
     return NULL;
+{{/isString}}
 }
 
 {{projectName}}_{{classVarName}}_{{enumName}}_e {{classname}}_parseFromJSON(cJSON *{{classname}}JSON) {
@@ -350,7 +353,6 @@ void {{classname}}_free({{classname}}_t *{{classname}}) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "{{classname}}_free");
         return ;
     }
-    listEntry_t *listEntry;
     {{#vars}}
     {{^isContainer}}
     {{^isPrimitiveType}}
@@ -442,6 +444,7 @@ void {{classname}}_free({{classname}}_t *{{classname}}) {
     {{#isArray}}
     {{#isPrimitiveType}}
     if ({{{classname}}}->{{{name}}}) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, {{classname}}->{{name}}) {
             free(listEntry->data);
         }
@@ -451,6 +454,7 @@ void {{classname}}_free({{classname}}_t *{{classname}}) {
     {{/isPrimitiveType}}
     {{^isPrimitiveType}}
     if ({{{classname}}}->{{{name}}}) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, {{classname}}->{{name}}) {
             {{^isEnum}}
             {{complexType}}_free(listEntry->data);
@@ -463,6 +467,7 @@ void {{classname}}_free({{classname}}_t *{{classname}}) {
     {{/isArray}}
     {{#isMap}}
     if ({{{classname}}}->{{{name}}}) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, {{classname}}->{{name}}) {
             keyValuePair_t *localKeyValue = listEntry->data;
             free (localKeyValue->key);
@@ -668,7 +673,7 @@ cJSON *{{classname}}_convertToJSON({{classname}}_t *{{classname}}) {
     listEntry_t *{{{name}}}ListEntry;
     if ({{{classname}}}->{{{name}}}) {
     list_ForEach({{{name}}}ListEntry, {{classname}}->{{{name}}}) {
-    cJSON *itemLocal = {{complexType}}_convertToJSON({{#isEnum}}{{#items}}({{projectName}}_{{complexType}}_{{enumName}}_e){{/items}}{{/isEnum}}{{{name}}}ListEntry->data);
+    cJSON *itemLocal = {{complexType}}_convertToJSON({{#isEnum}}{{#items}}({{projectName}}_{{complexType}}_{{enumName}}_e)(intptr_t){{/items}}{{/isEnum}}{{{name}}}ListEntry->data);
     if(itemLocal == NULL) {
     goto fail;
     }
@@ -1001,7 +1006,7 @@ fail:
         }
         {{#isEnum}}{{#items}}{{projectName}}_{{complexType}}_{{enumName}}_e {{/items}}{{/isEnum}}{{^isEnum}}{{complexType}}_t *{{/isEnum}}{{{name}}}Item = {{complexType}}_parseFromJSON({{{name}}}_local_nonprimitive);
 
-        list_addElement({{{name}}}List, {{#isEnum}}{{#items}}(void *){{/items}}{{/isEnum}}{{{name}}}Item);
+        list_addElement({{{name}}}List, {{#isEnum}}{{#items}}(void *)(intptr_t){{/items}}{{/isEnum}}{{{name}}}Item);
     }
     {{/isPrimitiveType}}
     {{/isArray}}

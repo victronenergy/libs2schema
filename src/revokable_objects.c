@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -28,9 +29,6 @@ cJSON *revokable_objects_convertToJSON(s2_revokable_objects__e revokable_objects
     //    goto fail;
     // }
     return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
 }
 
 s2_revokable_objects__e revokable_objects_parseFromJSON(cJSON *revokable_objectsJSON) {

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -51,7 +52,6 @@ void timer_type_free(timer_type_t *timer_type) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "timer_type_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (timer_type->id) {
         free(timer_type->id);
         timer_type->id = NULL;

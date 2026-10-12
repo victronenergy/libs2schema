@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -63,7 +64,6 @@ void ddbc_system_description_free(ddbc_system_description_t *ddbc_system_descrip
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ddbc_system_description_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ddbc_system_description->message_type) {
         free(ddbc_system_description->message_type);
         ddbc_system_description->message_type = NULL;
@@ -77,6 +77,7 @@ void ddbc_system_description_free(ddbc_system_description_t *ddbc_system_descrip
         ddbc_system_description->valid_from = NULL;
     }
     if (ddbc_system_description->actuators) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ddbc_system_description->actuators) {
             ddbc_actuator_description_free(listEntry->data);
         }

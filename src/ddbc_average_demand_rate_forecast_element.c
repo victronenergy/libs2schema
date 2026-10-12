@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -113,7 +114,6 @@ void ddbc_average_demand_rate_forecast_element_free(ddbc_average_demand_rate_for
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ddbc_average_demand_rate_forecast_element_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ddbc_average_demand_rate_forecast_element->duration) {
         free(ddbc_average_demand_rate_forecast_element->duration);
         ddbc_average_demand_rate_forecast_element->duration = NULL;

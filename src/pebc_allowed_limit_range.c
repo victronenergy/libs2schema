@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -55,7 +56,6 @@ void pebc_allowed_limit_range_free(pebc_allowed_limit_range_t *pebc_allowed_limi
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "pebc_allowed_limit_range_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (pebc_allowed_limit_range->range_boundary) {
         number_range_free(pebc_allowed_limit_range->range_boundary);
         pebc_allowed_limit_range->range_boundary = NULL;

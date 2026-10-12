@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "object.h"
+#include <s2schema/object.h>
 
 object_t *object_create() {
     object_t *object = calloc(1, sizeof(object_t));

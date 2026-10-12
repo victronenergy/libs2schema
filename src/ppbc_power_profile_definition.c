@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -57,7 +58,6 @@ void ppbc_power_profile_definition_free(ppbc_power_profile_definition_t *ppbc_po
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ppbc_power_profile_definition_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ppbc_power_profile_definition->message_type) {
         free(ppbc_power_profile_definition->message_type);
         ppbc_power_profile_definition->message_type = NULL;
@@ -79,6 +79,7 @@ void ppbc_power_profile_definition_free(ppbc_power_profile_definition_t *ppbc_po
         ppbc_power_profile_definition->end_time = NULL;
     }
     if (ppbc_power_profile_definition->power_sequences_containers) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ppbc_power_profile_definition->power_sequences_containers) {
             ppbc_power_sequence_container_free(listEntry->data);
         }

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -51,7 +52,6 @@ void frbc_storage_status_free(frbc_storage_status_t *frbc_storage_status) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_storage_status_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_storage_status->message_type) {
         free(frbc_storage_status->message_type);
         frbc_storage_status->message_type = NULL;

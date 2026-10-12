@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void handshake_free(handshake_t *handshake) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "handshake_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (handshake->message_type) {
         free(handshake->message_type);
         handshake->message_type = NULL;
@@ -59,6 +59,7 @@ void handshake_free(handshake_t *handshake) {
         handshake->message_id = NULL;
     }
     if (handshake->supported_protocol_versions) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, handshake->supported_protocol_versions) {
             free(listEntry->data);
         }

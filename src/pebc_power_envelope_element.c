@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -63,7 +64,6 @@ void pebc_power_envelope_element_free(pebc_power_envelope_element_t *pebc_power_
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "pebc_power_envelope_element_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (pebc_power_envelope_element->duration) {
         free(pebc_power_envelope_element->duration);
         pebc_power_envelope_element->duration = NULL;

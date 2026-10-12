@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -28,9 +29,6 @@ cJSON *ppbc_power_sequence_status_convertToJSON(s2_ppbc_power_sequence_status__e
     //    goto fail;
     // }
     return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
 }
 
 s2_ppbc_power_sequence_status__e ppbc_power_sequence_status_parseFromJSON(cJSON *ppbc_power_sequence_statusJSON) {

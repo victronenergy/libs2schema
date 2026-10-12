@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -28,9 +29,6 @@ cJSON *control_type_convertToJSON(s2_control_type__e control_type) {
     //    goto fail;
     // }
     return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
 }
 
 s2_control_type__e control_type_parseFromJSON(cJSON *control_typeJSON) {

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -73,7 +74,6 @@ void ombc_instruction_free(ombc_instruction_t *ombc_instruction) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ombc_instruction_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ombc_instruction->message_type) {
         free(ombc_instruction->message_type);
         ombc_instruction->message_type = NULL;

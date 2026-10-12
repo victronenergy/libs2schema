@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -113,7 +114,6 @@ void frbc_usage_forecast_element_free(frbc_usage_forecast_element_t *frbc_usage_
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_usage_forecast_element_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_usage_forecast_element->duration) {
         free(frbc_usage_forecast_element->duration);
         frbc_usage_forecast_element->duration = NULL;

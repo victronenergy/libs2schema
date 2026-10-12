@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -28,9 +29,6 @@ cJSON *commodity_convertToJSON(s2_commodity__e commodity) {
     //    goto fail;
     // }
     return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
 }
 
 s2_commodity__e commodity_parseFromJSON(cJSON *commodityJSON) {

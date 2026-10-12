@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -57,7 +58,6 @@ void power_range_free(power_range_t *power_range) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "power_range_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (power_range->start_of_range) {
         free(power_range->start_of_range);
         power_range->start_of_range = NULL;

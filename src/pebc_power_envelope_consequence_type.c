@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -28,9 +29,6 @@ cJSON *pebc_power_envelope_consequence_type_convertToJSON(s2_pebc_power_envelope
     //    goto fail;
     // }
     return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
 }
 
 s2_pebc_power_envelope_consequence_type__e pebc_power_envelope_consequence_type_parseFromJSON(cJSON *pebc_power_envelope_consequence_typeJSON) {

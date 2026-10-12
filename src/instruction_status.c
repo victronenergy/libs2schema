@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -28,9 +29,6 @@ cJSON *instruction_status_convertToJSON(s2_instruction_status__e instruction_sta
     //    goto fail;
     // }
     return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
 }
 
 s2_instruction_status__e instruction_status_parseFromJSON(cJSON *instruction_statusJSON) {

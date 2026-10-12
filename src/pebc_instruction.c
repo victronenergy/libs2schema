@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -67,7 +68,6 @@ void pebc_instruction_free(pebc_instruction_t *pebc_instruction) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "pebc_instruction_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (pebc_instruction->message_type) {
         free(pebc_instruction->message_type);
         pebc_instruction->message_type = NULL;
@@ -93,6 +93,7 @@ void pebc_instruction_free(pebc_instruction_t *pebc_instruction) {
         pebc_instruction->power_constraints_id = NULL;
     }
     if (pebc_instruction->power_envelopes) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, pebc_instruction->power_envelopes) {
             pebc_power_envelope_free(listEntry->data);
         }

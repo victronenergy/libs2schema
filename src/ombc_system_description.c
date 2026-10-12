@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -57,7 +58,6 @@ void ombc_system_description_free(ombc_system_description_t *ombc_system_descrip
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ombc_system_description_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ombc_system_description->message_type) {
         free(ombc_system_description->message_type);
         ombc_system_description->message_type = NULL;
@@ -71,6 +71,7 @@ void ombc_system_description_free(ombc_system_description_t *ombc_system_descrip
         ombc_system_description->valid_from = NULL;
     }
     if (ombc_system_description->operation_modes) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ombc_system_description->operation_modes) {
             ombc_operation_mode_free(listEntry->data);
         }
@@ -78,6 +79,7 @@ void ombc_system_description_free(ombc_system_description_t *ombc_system_descrip
         ombc_system_description->operation_modes = NULL;
     }
     if (ombc_system_description->transitions) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ombc_system_description->transitions) {
             transition_free(listEntry->data);
         }
@@ -85,6 +87,7 @@ void ombc_system_description_free(ombc_system_description_t *ombc_system_descrip
         ombc_system_description->transitions = NULL;
     }
     if (ombc_system_description->timers) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ombc_system_description->timers) {
             timer_type_free(listEntry->data);
         }

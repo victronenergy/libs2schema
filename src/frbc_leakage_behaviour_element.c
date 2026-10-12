@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -47,7 +48,6 @@ void frbc_leakage_behaviour_element_free(frbc_leakage_behaviour_element_t *frbc_
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_leakage_behaviour_element_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_leakage_behaviour_element->fill_level_range) {
         number_range_free(frbc_leakage_behaviour_element->fill_level_range);
         frbc_leakage_behaviour_element->fill_level_range = NULL;

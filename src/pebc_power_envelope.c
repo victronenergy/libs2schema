@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -45,12 +46,12 @@ void pebc_power_envelope_free(pebc_power_envelope_t *pebc_power_envelope) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "pebc_power_envelope_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (pebc_power_envelope->id) {
         free(pebc_power_envelope->id);
         pebc_power_envelope->id = NULL;
     }
     if (pebc_power_envelope->power_envelope_elements) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, pebc_power_envelope->power_envelope_elements) {
             pebc_power_envelope_element_free(listEntry->data);
         }

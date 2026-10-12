@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void session_request_free(session_request_t *session_request) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "session_request_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (session_request->message_type) {
         free(session_request->message_type);
         session_request->message_type = NULL;

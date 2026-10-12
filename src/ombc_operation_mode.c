@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -59,7 +60,6 @@ void ombc_operation_mode_free(ombc_operation_mode_t *ombc_operation_mode) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ombc_operation_mode_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ombc_operation_mode->id) {
         free(ombc_operation_mode->id);
         ombc_operation_mode->id = NULL;
@@ -69,6 +69,7 @@ void ombc_operation_mode_free(ombc_operation_mode_t *ombc_operation_mode) {
         ombc_operation_mode->diagnostic_label = NULL;
     }
     if (ombc_operation_mode->power_ranges) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ombc_operation_mode->power_ranges) {
             power_range_free(listEntry->data);
         }

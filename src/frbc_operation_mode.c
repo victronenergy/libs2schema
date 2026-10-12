@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -55,7 +56,6 @@ void frbc_operation_mode_free(frbc_operation_mode_t *frbc_operation_mode) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_operation_mode_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_operation_mode->id) {
         free(frbc_operation_mode->id);
         frbc_operation_mode->id = NULL;
@@ -65,6 +65,7 @@ void frbc_operation_mode_free(frbc_operation_mode_t *frbc_operation_mode) {
         frbc_operation_mode->diagnostic_label = NULL;
     }
     if (frbc_operation_mode->elements) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, frbc_operation_mode->elements) {
             frbc_operation_mode_element_free(listEntry->data);
         }

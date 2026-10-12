@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -53,7 +54,6 @@ void ddbc_timer_status_free(ddbc_timer_status_t *ddbc_timer_status) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ddbc_timer_status_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ddbc_timer_status->message_type) {
         free(ddbc_timer_status->message_type);
         ddbc_timer_status->message_type = NULL;

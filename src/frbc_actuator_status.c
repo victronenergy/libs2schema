@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -67,7 +68,6 @@ void frbc_actuator_status_free(frbc_actuator_status_t *frbc_actuator_status) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_actuator_status_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_actuator_status->message_type) {
         free(frbc_actuator_status->message_type);
         frbc_actuator_status->message_type = NULL;

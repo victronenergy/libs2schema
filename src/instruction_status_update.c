@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -53,7 +54,6 @@ void instruction_status_update_free(instruction_status_update_t *instruction_sta
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "instruction_status_update_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (instruction_status_update->message_type) {
         free(instruction_status_update->message_type);
         instruction_status_update->message_type = NULL;

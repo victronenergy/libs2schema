@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void ombc_timer_status_free(ombc_timer_status_t *ombc_timer_status) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ombc_timer_status_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ombc_timer_status->message_type) {
         free(ombc_timer_status->message_type);
         ombc_timer_status->message_type = NULL;

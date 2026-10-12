@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -83,7 +84,6 @@ void transition_free(transition_t *transition) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "transition_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (transition->id) {
         free(transition->id);
         transition->id = NULL;
@@ -97,6 +97,7 @@ void transition_free(transition_t *transition) {
         transition->to = NULL;
     }
     if (transition->start_timers) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, transition->start_timers) {
             free(listEntry->data);
         }
@@ -104,6 +105,7 @@ void transition_free(transition_t *transition) {
         transition->start_timers = NULL;
     }
     if (transition->blocking_timers) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, transition->blocking_timers) {
             free(listEntry->data);
         }

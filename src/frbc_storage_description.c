@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -75,7 +76,6 @@ void frbc_storage_description_free(frbc_storage_description_t *frbc_storage_desc
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_storage_description_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_storage_description->diagnostic_label) {
         free(frbc_storage_description->diagnostic_label);
         frbc_storage_description->diagnostic_label = NULL;

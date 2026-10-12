@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -135,7 +136,6 @@ void resource_manager_details_free(resource_manager_details_t *resource_manager_
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "resource_manager_details_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (resource_manager_details->message_type) {
         free(resource_manager_details->message_type);
         resource_manager_details->message_type = NULL;
@@ -153,6 +153,7 @@ void resource_manager_details_free(resource_manager_details_t *resource_manager_
         resource_manager_details->name = NULL;
     }
     if (resource_manager_details->roles) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, resource_manager_details->roles) {
             role_free(listEntry->data);
         }
@@ -180,6 +181,7 @@ void resource_manager_details_free(resource_manager_details_t *resource_manager_
         resource_manager_details->instruction_processing_delay = NULL;
     }
     if (resource_manager_details->available_control_types) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, resource_manager_details->available_control_types) {
         }
         list_freeList(resource_manager_details->available_control_types);
@@ -190,6 +192,7 @@ void resource_manager_details_free(resource_manager_details_t *resource_manager_
         resource_manager_details->provides_forecast = NULL;
     }
     if (resource_manager_details->provides_power_measurement_types) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, resource_manager_details->provides_power_measurement_types) {
         }
         list_freeList(resource_manager_details->provides_power_measurement_types);
@@ -310,7 +313,7 @@ cJSON *resource_manager_details_convertToJSON(resource_manager_details_t *resour
     listEntry_t *available_control_typesListEntry;
     if (resource_manager_details->available_control_types) {
     list_ForEach(available_control_typesListEntry, resource_manager_details->available_control_types) {
-    cJSON *itemLocal = control_type_convertToJSON((s2_control_type__e)available_control_typesListEntry->data);
+    cJSON *itemLocal = control_type_convertToJSON((s2_control_type__e)(intptr_t)available_control_typesListEntry->data);
     if(itemLocal == NULL) {
     goto fail;
     }
@@ -353,7 +356,7 @@ cJSON *resource_manager_details_convertToJSON(resource_manager_details_t *resour
     listEntry_t *provides_power_measurement_typesListEntry;
     if (resource_manager_details->provides_power_measurement_types) {
     list_ForEach(provides_power_measurement_typesListEntry, resource_manager_details->provides_power_measurement_types) {
-    cJSON *itemLocal = commodity_quantity_convertToJSON((s2_commodity_quantity__e)provides_power_measurement_typesListEntry->data);
+    cJSON *itemLocal = commodity_quantity_convertToJSON((s2_commodity_quantity__e)(intptr_t)provides_power_measurement_typesListEntry->data);
     if(itemLocal == NULL) {
     goto fail;
     }
@@ -584,7 +587,7 @@ resource_manager_details_t *resource_manager_details_parseFromJSON(cJSON *resour
         }
         s2_control_type__e available_control_typesItem = control_type_parseFromJSON(available_control_types_local_nonprimitive);
 
-        list_addElement(available_control_typesList, (void *)available_control_typesItem);
+        list_addElement(available_control_typesList, (void *)(intptr_t)available_control_typesItem);
     }
 
     // resource_manager_details->currency
@@ -641,7 +644,7 @@ resource_manager_details_t *resource_manager_details_parseFromJSON(cJSON *resour
         }
         s2_commodity_quantity__e provides_power_measurement_typesItem = commodity_quantity_parseFromJSON(provides_power_measurement_types_local_nonprimitive);
 
-        list_addElement(provides_power_measurement_typesList, (void *)provides_power_measurement_typesItem);
+        list_addElement(provides_power_measurement_typesList, (void *)(intptr_t)provides_power_measurement_typesItem);
     }
 
 

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -63,7 +64,6 @@ void ddbc_operation_mode_free(ddbc_operation_mode_t *ddbc_operation_mode) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ddbc_operation_mode_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ddbc_operation_mode->id) {
         free(ddbc_operation_mode->id);
         ddbc_operation_mode->id = NULL;
@@ -73,6 +73,7 @@ void ddbc_operation_mode_free(ddbc_operation_mode_t *ddbc_operation_mode) {
         ddbc_operation_mode->diagnostic_label = NULL;
     }
     if (ddbc_operation_mode->power_ranges) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, ddbc_operation_mode->power_ranges) {
             power_range_free(listEntry->data);
         }

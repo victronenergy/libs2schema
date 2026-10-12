@@ -139,6 +139,15 @@ else
   find "$BUILD_DIR/intermediate" -type f \( -name "*.c" -o -name "*.h" \) -exec sed -i '' 's/#include "..\/include\/binary.h"/#include <s2schema\/binary.h>/g' {} +
 fi
 
+#Replace "#include "object.h"" with "#include <s2schema/object.h>"
+if sed --version >/dev/null 2>&1; then
+  # GNU sed
+  find "$BUILD_DIR/intermediate" -type f \( -name "*.c" -o -name "*.h" \) -exec sed -i 's/#include "object.h"/#include <s2schema\/object.h>/g' {} +
+else
+  # BSD sed (macOS)
+  find "$BUILD_DIR/intermediate" -type f \( -name "*.c" -o -name "*.h" \) -exec sed -i '' 's/#include "object.h"/#include <s2schema\/object.h>/g' {} +
+fi
+
 mkdir -p "$PROJECT_ROOT/include/s2schema"
 cp "$BUILD_DIR/intermediate/"*.h "$PROJECT_ROOT/include/s2schema/"
 

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -77,7 +78,6 @@ void pebc_energy_constraint_free(pebc_energy_constraint_t *pebc_energy_constrain
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "pebc_energy_constraint_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (pebc_energy_constraint->message_type) {
         free(pebc_energy_constraint->message_type);
         pebc_energy_constraint->message_type = NULL;

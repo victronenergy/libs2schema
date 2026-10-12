@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void reception_status_free(reception_status_t *reception_status) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "reception_status_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (reception_status->message_type) {
         free(reception_status->message_type);
         reception_status->message_type = NULL;

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -28,9 +29,6 @@ cJSON *session_request_type_convertToJSON(s2_session_request_type__e session_req
     //    goto fail;
     // }
     return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
 }
 
 s2_session_request_type__e session_request_type_parseFromJSON(cJSON *session_request_typeJSON) {

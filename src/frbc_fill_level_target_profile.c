@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void frbc_fill_level_target_profile_free(frbc_fill_level_target_profile_t *frbc_
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_fill_level_target_profile_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_fill_level_target_profile->message_type) {
         free(frbc_fill_level_target_profile->message_type);
         frbc_fill_level_target_profile->message_type = NULL;
@@ -63,6 +63,7 @@ void frbc_fill_level_target_profile_free(frbc_fill_level_target_profile_t *frbc_
         frbc_fill_level_target_profile->start_time = NULL;
     }
     if (frbc_fill_level_target_profile->elements) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, frbc_fill_level_target_profile->elements) {
             frbc_fill_level_target_profile_element_free(listEntry->data);
         }

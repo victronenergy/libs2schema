@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void revoke_object_free(revoke_object_t *revoke_object) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "revoke_object_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (revoke_object->message_type) {
         free(revoke_object->message_type);
         revoke_object->message_type = NULL;

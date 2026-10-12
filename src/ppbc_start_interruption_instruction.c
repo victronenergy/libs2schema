@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -71,7 +72,6 @@ void ppbc_start_interruption_instruction_free(ppbc_start_interruption_instructio
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ppbc_start_interruption_instruction_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ppbc_start_interruption_instruction->message_type) {
         free(ppbc_start_interruption_instruction->message_type);
         ppbc_start_interruption_instruction->message_type = NULL;

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -28,9 +29,6 @@ cJSON *reception_status_values_convertToJSON(s2_reception_status_values__e recep
     //    goto fail;
     // }
     return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
 }
 
 s2_reception_status_values__e reception_status_values_parseFromJSON(cJSON *reception_status_valuesJSON) {

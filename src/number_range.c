@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -53,7 +54,6 @@ void number_range_free(number_range_t *number_range) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "number_range_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (number_range->start_of_range) {
         free(number_range->start_of_range);
         number_range->start_of_range = NULL;

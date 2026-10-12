@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -63,7 +64,6 @@ void ombc_status_free(ombc_status_t *ombc_status) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "ombc_status_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (ombc_status->message_type) {
         free(ombc_status->message_type);
         ombc_status->message_type = NULL;

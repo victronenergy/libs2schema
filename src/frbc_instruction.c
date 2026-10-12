@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -77,7 +78,6 @@ void frbc_instruction_free(frbc_instruction_t *frbc_instruction) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_instruction_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_instruction->message_type) {
         free(frbc_instruction->message_type);
         frbc_instruction->message_type = NULL;

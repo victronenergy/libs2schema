@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void frbc_operation_mode_element_free(frbc_operation_mode_element_t *frbc_operat
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_operation_mode_element_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_operation_mode_element->fill_level_range) {
         number_range_free(frbc_operation_mode_element->fill_level_range);
         frbc_operation_mode_element->fill_level_range = NULL;
@@ -59,6 +59,7 @@ void frbc_operation_mode_element_free(frbc_operation_mode_element_t *frbc_operat
         frbc_operation_mode_element->fill_rate = NULL;
     }
     if (frbc_operation_mode_element->power_ranges) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, frbc_operation_mode_element->power_ranges) {
             power_range_free(listEntry->data);
         }

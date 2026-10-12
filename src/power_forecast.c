@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void power_forecast_free(power_forecast_t *power_forecast) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "power_forecast_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (power_forecast->message_type) {
         free(power_forecast->message_type);
         power_forecast->message_type = NULL;
@@ -63,6 +63,7 @@ void power_forecast_free(power_forecast_t *power_forecast) {
         power_forecast->start_time = NULL;
     }
     if (power_forecast->elements) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, power_forecast->elements) {
             power_forecast_element_free(listEntry->data);
         }

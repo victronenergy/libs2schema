@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -28,9 +29,6 @@ cJSON *energy_management_role_convertToJSON(s2_energy_management_role__e energy_
     //    goto fail;
     // }
     return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
 }
 
 s2_energy_management_role__e energy_management_role_parseFromJSON(cJSON *energy_management_roleJSON) {

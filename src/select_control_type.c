@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -45,7 +46,6 @@ void select_control_type_free(select_control_type_t *select_control_type) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "select_control_type_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (select_control_type->message_type) {
         free(select_control_type->message_type);
         select_control_type->message_type = NULL;

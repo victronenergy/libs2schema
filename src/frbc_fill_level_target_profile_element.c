@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -47,7 +48,6 @@ void frbc_fill_level_target_profile_element_free(frbc_fill_level_target_profile_
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "frbc_fill_level_target_profile_element_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (frbc_fill_level_target_profile_element->duration) {
         free(frbc_fill_level_target_profile_element->duration);
         frbc_fill_level_target_profile_element->duration = NULL;

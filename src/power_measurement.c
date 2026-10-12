@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -49,7 +50,6 @@ void power_measurement_free(power_measurement_t *power_measurement) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "power_measurement_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (power_measurement->message_type) {
         free(power_measurement->message_type);
         power_measurement->message_type = NULL;
@@ -63,6 +63,7 @@ void power_measurement_free(power_measurement_t *power_measurement) {
         power_measurement->measurement_timestamp = NULL;
     }
     if (power_measurement->values) {
+        listEntry_t *listEntry;
         list_ForEach(listEntry, power_measurement->values) {
             power_value_free(listEntry->data);
         }

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -47,7 +48,6 @@ void power_value_free(power_value_t *power_value) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "power_value_free");
         return ;
     }
-    listEntry_t *listEntry;
     if (power_value->value) {
         free(power_value->value);
         power_value->value = NULL;

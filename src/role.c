@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -41,7 +42,6 @@ void role_free(role_t *role) {
         fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "role_free");
         return ;
     }
-    listEntry_t *listEntry;
     free(role);
 }
 
